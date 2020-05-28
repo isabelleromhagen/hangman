@@ -15,10 +15,9 @@ class App extends Component {
       buttonState : null,
       newWord: ''
     }
-    this.buttons = [];
-    
-    this.output = {};
 
+    this.buttons = [];
+    this.output = {};
     this.clickedButtons = [];
     this.newWord = "";
 
@@ -34,7 +33,6 @@ generateButtonObject(id, letter){
     key: id,
     value: letter
   };
-  
   return(
     buttonObj
   );
@@ -42,7 +40,7 @@ generateButtonObject(id, letter){
 
 generateButton(buttonObj) {
 
-  var isButtonClicked = false;
+  let isButtonClicked = false;
     if (this.clickedButtons){
       isButtonClicked = this.clickedButtons.some(x => x == buttonObj.key.toString());
     }
@@ -70,7 +68,6 @@ createButtons() {
 
   for (let i = 0; i < alphabet.length; i++){
     let buttonObj = this.generateButtonObject(i, alphabet[i]);
-        
     buttons[i] = this.generateButton(buttonObj);
   }
   return buttons;
@@ -98,7 +95,7 @@ handleReset () {
 }
 
 
-generateDashes() {
+  generateDashes() {
   let dashes = '';
   console.log('Dashes based on: ' + this.newWord);
   for (let i = 0; i < this.newWord.length; i++) {
@@ -107,6 +104,7 @@ generateDashes() {
   console.log(dashes);
   return dashes;
 }
+
 
 initiateButtonView(){
   
@@ -145,7 +143,6 @@ initiateButtonView(){
 }
 
 
-
 render() {
      
      return this.initiateButtonView();
@@ -155,7 +152,3 @@ render() {
 
 
 export default App;
-
-
-//= alphabet.split("").map((letter) => (this.GenerateButton));  
-  //let dashes = str.replace(\D, "_ ");
