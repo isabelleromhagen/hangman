@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import hanger from './images/hanger.jpg';
-//import ButtonComponent from './ButtonComponent';
-//import { render } from 'react-dom';
+import getWord from './words.js';
 
 
 class App extends Component {
@@ -11,8 +10,6 @@ class App extends Component {
     super(props);
 
     this.state = {
-      //unused: true,
-      bgColor: 'green',
       className: 'unused',
       pageLoad : true,
       buttonState : null
@@ -22,10 +19,12 @@ class App extends Component {
     this.output = {};
 
     this.clickedButtons = [];
+    this.newWord = "";
 
     this.handleOnClick = this.handleOnClick.bind(this);
     this.initiateButtonView = this.initiateButtonView.bind(this);
     this.generateButton = this.generateButton.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   };
  
 
@@ -33,7 +32,6 @@ generateButtonObject(id, letter){
   let buttonObj = {
     key: id,
     value: letter
-    //unused: this.state.unused
   };
   
   return(
@@ -82,11 +80,29 @@ handleOnClick = e => {
   this.clickedButtons.push(e);
   let changedButtons = this.createButtons();
   
-  console.log('got here, id to look for: ' + e + ' unused:  color: ' + this.state.bgColor);
   this.setState({   
     buttonState : changedButtons
   });
 
+}
+
+handleReset () {
+  this.clickedButtons = [];
+  this.newWord = getWord();
+  this.setState({
+    buttonState: null
+  });
+}
+
+
+generateDashes() {
+  let dashes = '';
+  console.log('Dashes based on: ' + this.newWord);
+  for (let i = 0; i < this.newWord.length; i++) {
+    dashes = dashes + '_ ';
+  }
+  console.log(dashes);
+  return dashes;
 }
 
 initiateButtonView(){
@@ -97,10 +113,22 @@ initiateButtonView(){
   }
   else{
     buttonView = this.createButtons();
+    this.newWord = getWord();
+    console.log('word obtained: ' + this.newWord);
+    this.dashes = this.generateDashes();
   }
 
-  
+  //let dashes = str.replace(\D, "_ ");
 
+
+  /*let dashes(){
+    console.log();
+    for (let i = 0; this.newWord.length; i++) {
+        dashes += '_ '
+    }
+  
+    console.log(dashes);
+  }*/
 
   return (
     <div className="App">
@@ -108,7 +136,7 @@ initiateButtonView(){
       <p>Spelet går ut på att lista ut ordet. Gissa en bokstav i 
           taget tills hela ordet kommit fram eller gubben hängts.</p>
       <img src={hanger} alt='gallows'/>
-      <h1>_ _ _ _ _ _</h1>
+      <h1>{this.dashes}</h1>
       <p>Antal gissningar: 0</p>
       <div className="buttonContainer">
           {buttonView.map(Element=>(
@@ -117,9 +145,12 @@ initiateButtonView(){
            </div>
           ))}
       </div>
+      <button onClick={() => this.handleReset()}> Återställ</button>
     </div>
   );
 }
+
+
 
 render() {
      

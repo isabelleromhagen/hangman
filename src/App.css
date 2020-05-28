@@ -52,7 +52,6 @@ img {
 }
 
 .unused {
-  
   font-family: 'Coming Soon';
   color: white;
   background-color: #ffc107;
@@ -63,7 +62,6 @@ img {
   width: 35px;
   font-size: large;
   margin: 2px;
-  
 }
 
 .usedButton {
@@ -80,6 +78,9 @@ img {
 }
 
 .buttonContainer {
+  display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin-left: 30%;
     margin-right: 30%;
 }
