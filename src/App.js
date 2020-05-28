@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import hanger from './images/hanger.jpg';
+import gallows from './images/gallows.jpg';
 import getWord from './words.js';
 
 
@@ -12,7 +12,8 @@ class App extends Component {
     this.state = {
       className: 'unused',
       pageLoad : true,
-      buttonState : null
+      buttonState : null,
+      newWord: ''
     }
     this.buttons = [];
     
@@ -46,7 +47,7 @@ generateButton(buttonObj) {
       isButtonClicked = this.clickedButtons.some(x => x == buttonObj.key.toString());
     }
 
-  let buttonClassName = "unused";
+  let buttonClassName = "unusedButton";
   if(isButtonClicked){
     buttonClassName = "usedButton";
     return(
@@ -81,16 +82,18 @@ handleOnClick = e => {
   let changedButtons = this.createButtons();
   
   this.setState({   
-    buttonState : changedButtons
+    buttonState: changedButtons,
+    newWord: this.newWord
   });
 
 }
 
 handleReset () {
   this.clickedButtons = [];
-  this.newWord = getWord();
+  this.newWord = '';
   this.setState({
-    buttonState: null
+    buttonState: null,
+    newWord: getWord()
   });
 }
 
@@ -113,29 +116,20 @@ initiateButtonView(){
   }
   else{
     buttonView = this.createButtons();
-    this.newWord = getWord();
-    console.log('word obtained: ' + this.newWord);
-    this.dashes = this.generateDashes();
-  }
-
-  //let dashes = str.replace(\D, "_ ");
-
-
-  /*let dashes(){
-    console.log();
-    for (let i = 0; this.newWord.length; i++) {
-        dashes += '_ '
+    if(this.newWord < 1) {
+      this.newWord = getWord();
+      console.log('word obtained: ' + this.newWord);
+      this.dashes = this.generateDashes();
     }
-  
-    console.log(dashes);
-  }*/
+ 
+  }
 
   return (
     <div className="App">
       <h1>Hänga gubbe</h1>
       <p>Spelet går ut på att lista ut ordet. Gissa en bokstav i 
           taget tills hela ordet kommit fram eller gubben hängts.</p>
-      <img src={hanger} alt='gallows'/>
+      <img src={gallows} alt='gallows'/>
       <h1>{this.dashes}</h1>
       <p>Antal gissningar: 0</p>
       <div className="buttonContainer">
@@ -145,7 +139,7 @@ initiateButtonView(){
            </div>
           ))}
       </div>
-      <button onClick={() => this.handleReset()}> Återställ</button>
+      <button className="resetButton" onClick={() => this.handleReset()}> Återställ</button>
     </div>
   );
 }
@@ -164,20 +158,4 @@ export default App;
 
 
 //= alphabet.split("").map((letter) => (this.GenerateButton));  
-// {gamestate}
-
-/*  {this.buttons.map(button=>(
-              <ButtonComponent
-              key={button.key}
-              id={button.id}
-              value={button.value}
-              unused={true}
-              style={'#bdbdbd'}
-              onClick={this.handleonclick}/>
-            ))}*/
-
-            /*componentWillMount(){
-  this.buttons = this.createButtons();  
-}*/
-
-//{this.buttons}
+  //let dashes = str.replace(\D, "_ ");
