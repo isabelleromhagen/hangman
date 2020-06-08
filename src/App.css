@@ -24,7 +24,7 @@ img {
   margin-top: 5%;
 }
 
-.unusedButton {
+Button {
   font-family: 'Coming Soon';
   color: white;
   background-color: #ffc107;
@@ -37,7 +37,7 @@ img {
   margin: 2px;
 }
 
-.usedButton {
+Button:disabled {
   font-family: 'Coming Soon';
   color: white;
   background-color: #bdbdbd;
@@ -49,6 +49,19 @@ img {
   font-size: large;
   margin: 2px;
 }
+
+/* .usedButton {
+  font-family: 'Coming Soon';
+  color: white;
+  background-color: #bdbdbd;
+  box-shadow: 0px 5px #6e6e6e;
+  border: none;
+  border-radius: 20%;
+  height: 35px;
+  width: 35px;
+  font-size: large;
+  margin: 2px;
+} */
 
 .buttonContainer {
   display: flex;
