@@ -62,7 +62,7 @@ handleOnClick(e) {
     this.setState((state) => ({   
       isDisabled: state.isDisabled.add(letterValue),
       newWord: this.newWord,
-    }));
+    })); 
   }
 
 
