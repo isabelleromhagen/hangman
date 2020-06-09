@@ -18,7 +18,8 @@ const Hangman = () => {
     return imageList;
   };
 
-    const [inactiveButtons, setDisabled] = useState(new Set());
+    // const [inactiveButtons, setDisabled] = useState(new Set());
+    const [inactiveButtons, setDisabled] = useState([]);
     const [newWord, setNewWord] = useState(getWord());
     const [currentImageNumber, setCurrentImage] = useState(0);
     const [images, setImages] = useState(loadImages());
@@ -34,7 +35,7 @@ const Hangman = () => {
 const checkDisabled = (letter) =>{
   if(inactiveButtons)
   {
-    return inactiveButtons.has(letter);
+    return inactiveButtons.includes(letter);
   }
   return false;
     
@@ -60,15 +61,15 @@ const handleOnClick = (e) => {
 
 const checkIfLetterExists = (letter) => {
 
-        let tempSet = inactiveButtons;
-        tempSet.add(letter);
+        let tempSet = [...inactiveButtons];
+        tempSet.push(letter);
         setDisabled(tempSet);
 
         if(newWord.includes(letter)) {
             let letterIndex = newWord.indexOf(letter);
             console.log('index: ', letterIndex, ' in word ', newWord, ' dashes: ', dashes);
   
-            let tempDashes = dashes;
+            let tempDashes = [...dashes];
             tempDashes[letterIndex] = letter;
             console.log('tempdashes: ', tempDashes);
             
@@ -102,7 +103,7 @@ const handleReset = () => {
         setMessage("");
         setNewWord(getWord());
         setDashes(generateDashes());
-        setDisabled(new Set());
+        setDisabled([]);
         setCurrentImage(0);
         setGameLost(false);
       }
