@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+ import React, { Component } from 'react';
+
 import './App.css';
 import gallows0 from './images/gallows0.jpg';
 import gallows1 from './images/gallows1.jpg';
@@ -9,6 +10,7 @@ import gallows5 from './images/gallows5.jpg';
 import gallows6 from './images/gallows6.jpg';
 import getWord from './words.js';
 import Button from './components/Button';
+import Hangman from './components/Hangman';
 
 
 class App extends Component {
@@ -30,7 +32,7 @@ class App extends Component {
     this.newWord = "";
     this.guesses = 6;
     this.imageSource = 0;
-    this.message = "Spelet pågår";
+    this.message = "";
 
     this.handleOnClick = this.handleOnClick.bind(this);
     this.handleReset = this.handleReset.bind(this);
@@ -102,7 +104,7 @@ checkIfLetterExists (letter) {
 handleReset () {
   console.log('resetting');
   this.guesses = 6
-  this.message = "Gissa ordet"
+  this.message = ""
   this.newWord = getWord();
   console.log('new word obtained: ' + this.newWord);
   this.dashes = this.generateDashes();
@@ -162,7 +164,12 @@ initiateButtonView(){
 
 render() {
      
-     return this.initiateButtonView();
+      // return this.initiateButtonView();
+      return(
+        <div>
+          <Hangman/>
+        </div>
+      );
   }
 
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import './Hangman';
 
 const Button = ({value, isClicked, isDisabled}) => {
     return (
